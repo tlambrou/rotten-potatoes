@@ -3,13 +3,12 @@ var methodOverride = require('method-override')
 var app = express()
 var exphbs  = require('express-handlebars');
 var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes');
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
-
-mongoose.connect('mongodb://localhost/rotten-potatoes');
 
 var Review = mongoose.model('Review', {
   title: String,
